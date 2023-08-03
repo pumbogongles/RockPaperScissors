@@ -1,3 +1,5 @@
+const prompt = require("prompt-sync")();
+
 function getComputerChoice() {
     randomAnswer = Math.floor(Math.random() * 3)
     switch (randomAnswer) {
