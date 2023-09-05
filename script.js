@@ -1,5 +1,3 @@
-const prompt = require("prompt-sync")();
-
 function getComputerChoice() {
     randomAnswer = Math.floor(Math.random() * 3)
     switch (randomAnswer) {
@@ -12,18 +10,33 @@ function getComputerChoice() {
     }
 }
 
+const buttons = document.querySelectorAll('button')
+buttons.forEach(buttonPress => {
+    buttonPress.addEventListener('click', () => {
+        const playerSelection = buttonPress.innerText
+        console.log("Player Selected " + playerSelection)
+        const computerSelection = getComputerChoice();
+
+        const result = playRound(playerSelection, computerSelection)
+        console.log(result)
+
+        console.log(`Your score is ${playerWinCount}`)
+        console.log(`Computer score is ${computerWinCount}`)
+    })
+})
+
+
+
+
 playerWinCount = 0;
 computerWinCount = 0;
 function playRound(playerSelection, computerSelection) {
-
-    computerSelection = getComputerChoice();
-    playerSelection = prompt("Please enter your choice of Rock, Paper or Scissors: ")
 
     if (playerSelection == computerSelection) {
         return "Same choices. Draw!"
     } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
         playerWinCount += 1
-        return "Rock breaks Scissors. You win!" 
+        return "Rock breaks Scissors. You win!"
     } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
         playerWinCount += 1
         return "Scissors cuts Paper. You win!"
@@ -44,8 +57,3 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-for (i = 0; i < 5; i++) {
-    console.log(playRound());
-}
-console.log(`Your score is ${playerWinCount}`)
-console.log(`Computer score is ${computerWinCount}`)
